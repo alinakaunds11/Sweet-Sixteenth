@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sweet Sixteenth — Sathana Hannah Nathan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --burgundy:#800020;
+  --burgundy-light:#b36b80;
+  --accent:#b03060;
+  --card-bg:#fffafc;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:#fff7fc;
+  color:#333;
+}
+header{
+  background:var(--burgundy);
+  padding:30px 16px;
+  text-align:center;
+  font-size:2.4rem;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  letter-spacing:0.05em;
+  color:white;
+}
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  background:var(--burgundy-light);
+  padding:12px;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  cursor:pointer;
+}
+section{
+  display:none;
+  max-width:900px;
+  margin:40px auto;
+  padding:0 20px;
+}
+h2{
+  color:var(--accent);
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-style:italic;
+}
+p{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;
+  font-style:italic;
+  line-height:1.7rem;
+}
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+.photo-grid img{
+  width:100%;
+  border-radius:12px;
+}
+.music-btn{
+  margin:20px auto;
+  display:block;
+  background:var(--burgundy);
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:20px;
+  font-weight:700;
+  cursor:pointer;
+}
+.memory-card{
+  background:var(--card-bg);
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+  position:relative;
+}
+.paperclip{
+  position:absolute;
+  top:10px;
+  left:14px;
+  font-size:20px;
+}
+.memory-card textarea{
+  width:100%;
+  border:none;
+  background:transparent;
+  resize:vertical;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;
+  font-size:1.05rem;
+}
+.memory-controls{
+  margin-top:10px;
+}
+.memory-controls button{
+  background:var(--burgundy);
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>Sathana Hannah Nathan</header>
+
+<nav>
+  <a onclick="showSection('memories')">Our Memories</a>
+  <a onclick="showSection('photos')">Snapshots of Us</a>
+  <a onclick="showSection('affirmations')">Affirmations</a>
+  <a onclick="showSection('letter')">A Letter for Your Sixteenth</a>
+  <a onclick="showSection('bible')">Bible verses</a>
+  <a onclick="showSection('future')">Future memories</a>
+</nav>
+
+<section id="memories">
+<h2>A lifelong “Yes”</h2>
+<p>
+GIRLLL, our memories are wide as the ocean and as long as Psalm 119. But every time I think of you, I always go back to remembering my first memory of us as friends.<br><br>
+
+It was in Methodist church — our mums were sitting right at the back, and you came up to me and said, “do you want to playyyy?” Honestly, I thank God every day that I said YES. We ran up and down the aisle between the chairs, and every time it makes me tear up thinking about how much we’ve been through.<br><br>
+
+And that is exactly what you are to me, Sathana Hannah Nathan — a true friend and family. Whether it was eating Kenneth Uncle’s Nutella sandwiches on sports day or taking photos in every mirror or our random yapping sessions — that will forever be our lifelong tradition. I can’t wait to see the memories we make in the future, but until then, I’ll cherish every moment we have now.
+</p>
+</section>
+
+<section id="photos">
+<h2>Snapshots of Us</h2>
+<div class="photo-grid">
+  <img src="Us.png" alt="Us collage">
+</div>
+</section>
+
+<section id="affirmations">
+<h2>Affirmations</h2>
+<p>You are deeply loved. You are chosen. You are never alone.</p>
+</section>
+
+<section id="letter">
+<h2>A Letter for Your Sixteenth</h2>
+<p>
+Happy Birthday my best friend 🤍  
+You are such a blessing in my life, and I pray this year is filled with God’s peace, joy, and love.
+</p>
+</section>
+
+<section id="bible">
+<h2>Bible verses</h2>
+<p>
+“You are altogether beautiful, my darling; there is no flaw in you.” — Song of Songs 4:7 (NLT)
+</p>
+</section>
+
+<section id="future">
+<h2>Future memories</h2>
+<div id="memoryList"></div>
+<button class="music-btn" onclick="addMemory()">Add new memory</button>
+</section>
+
+<button class="music-btn" onclick="toggleMusic()">Play music ♡</button>
+<audio id="bgMusic" src="SpotiDownloader.com - When I Lock Eyes (feat. Brandon Lake & Elyssa Smith) - Maverick City Music.mp3"></audio>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='block';
+}
+showSection('memories');
+
+function toggleMusic(){
+  const music=document.getElementById('bgMusic');
+  music.volume=0.4;
+  music.paused ? music.play() : music.pause();
+}
+
+document.addEventListener('visibilitychange',()=>{
+  const music=document.getElementById('bgMusic');
+  if(document.hidden && !music.paused) music.pause();
+});
+
+function loadMemories(){
+  const list=document.getElementById('memoryList');
+  list.innerHTML='';
+  const memories=JSON.parse(localStorage.getItem('futureMemories')||'[]');
+  memories.forEach((m,i)=>{
+    const card=document.createElement('div');
+    card.className='memory-card';
+    card.innerHTML=`<div class="paperclip">📎</div>
+      <textarea>${m}</textarea>
+      <div class="memory-controls">
+        <button onclick="deleteMemory(${i})">Delete</button>
+      </div>`;
+    card.querySelector('textarea').oninput=e=>{
+      memories[i]=e.target.value;
+      localStorage.setItem('futureMemories',JSON.stringify(memories));
+    };
+    list.append(card);
+  });
+}
+function addMemory(){
+  const memories=JSON.parse(localStorage.getItem('futureMemories')||'[]');
+  memories.push('');
+  localStorage.setItem('futureMemories',JSON.stringify(memories));
+  loadMemories();
+}
+function deleteMemory(i){
+  const memories=JSON.parse(localStorage.getItem('futureMemories')||'[]');
+  memories.splice(i,1);
+  localStorage.setItem('futureMemories',JSON.stringify(memories));
+  loadMemories();
+}
+loadMemories();
+</script>
+
+</body>
+</html>
+
