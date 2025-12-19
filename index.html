@@ -261,23 +261,39 @@ function loadMemories(){
     list.append(card);
   });
 }
-function addMemory(){
-  const memories=JSON.parse(localStorage.getItem('futureMemories')||'[]');
-  memories.push('');
-  localStorage.setItem('futureMemories',JSON.stringify(memories));
-  loadMemories();
+function loadMemories(){
+  const list = document.getElementById('memoryList');
+  list.innerHTML = '';
+  const memories = JSON.parse(localStorage.getItem('futureMemories') || '[]');
+  
+  // ADD THIS: If there are no memories, add an empty one automatically
+  if (memories.length === 0) {
+    memories.push('');
+    localStorage.setItem('futureMemories', JSON.stringify(memories));
+  }
+
+  memories.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'memory-card';
+    card.innerHTML = `<div class="paperclip">📎</div>
+      <textarea placeholder="Write a memory here...">${m}</textarea>
+      <div class="memory-controls">
+        <button onclick="deleteMemory(${i})">Delete</button>
+      </div>`;
+    
+    // This part handles the saving while you type
+    card.querySelector('textarea').oninput = e => {
+      memories[i] = e.target.value;
+      localStorage.setItem('futureMemories', JSON.stringify(memories));
+    };
+    list.append(card);
+  });
 }
-function deleteMemory(i){
-  const memories=JSON.parse(localStorage.getItem('futureMemories')||'[]');
-  memories.splice(i,1);
-  localStorage.setItem('futureMemories',JSON.stringify(memories));
-  loadMemories();
-}
-loadMemories();
 </script>
 
 </body>
 </html>
+
 
 
 
