@@ -240,16 +240,7 @@ function showSection(id){
 }
 showSection('memories');
 
-function toggleMusic(){
-  const music=document.getElementById('bgMusic');
-  music.volume=0.4;
-  music.paused ? music.play() : music.pause();
-}
 
-document.addEventListener('visibilitychange',()=>{
-  const music=document.getElementById('bgMusic');
-  if(document.hidden && !music.paused) music.pause();
-});
 
 function loadMemories(){
   const list=document.getElementById('memoryList');
@@ -287,6 +278,7 @@ loadMemories();
 
 </body>
 </html>
+
 
 
 
